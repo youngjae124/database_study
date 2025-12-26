@@ -94,3 +94,140 @@ SELECT distinct job, deptno FROM EMP;
 
 
 
+/********************************************************/
+
+조건 WHERE 절
+FROM ...
+WHERE ...;
+
+SELECT *
+FROM emp;
+
+SELECT *
+FROM emp
+WHERE sal > 2500; -- sal 값이 2500 초과하는 직원의 모든 정보 조회
+
+SELECT ename
+FROM emp
+WHERE sal > 2500; -- sal 값이 2500 초과하는 직원의 모든 정보 조회
+
+SELECT *
+FROM emp
+where job = 'SALESMAN';
+-- 직업 세일즈맨인 사람만 조회
+
+SELECT *
+FROM emp;
+where deptno = 10; -- 부서번호 가 10번인 사원들 정보
+
+
+SELECT *
+FROM emp;
+--where deptno != 10;
+where deptno <> 10; -- 부서번호10번인 아닌 사원들 정보
+
+select *
+from student 
+--where weight >= 55;-- 55kg이상
+--where weight >= 55 and weight <= 70; --55kg <= <=70kg
+where weight BETWEEN 55 AND 70;
+
+
+select *
+from student --1~3학년까지만 조회
+--where grade >= 1 and grade <= 3;
+--where grade BETWEEN 1 AND 3;
+--where grade= 1 OR grade = 2 OR grade = 3;
+--where grade <> 4; --grade != 4 4학년까지만 있다는 가정 하 에 사용가능 
+where grade IN (1,2,3);
+
+select *
+from student
+--where grade IN (2,4);
+--where grade-2 OR grade=4;
+--where grade!=1 AND grade<>3;
+where grade NOT IN (1,3);
+
+
+LIKE 패턴 검색(문자)
+    % : 0~n개 아무갯수
+    _: 그 위치에 한개
+    
+select *
+from emp
+--where ename LIKE '%M%'; --'123M123' , 'M123123', '123213M'
+--where ename LIKE '_M%'; -- SMITH
+where ename LIKE '__M%';  --JAMES
+
+
+select *
+from emp
+--where comm is null; 
+where comm is not null; 
+
+
+--날짜 비교
+1201
+1221
+날짜 미래일수록 큰 값
+과거일수록 작은 값
+
+select *
+from emp -- 테이블정보 팝업설명 단축키 : shift +f4
+--where hiredate = '81/05/01';
+--where hiredate ='1981-05-01';
+--where hiredate > '80/08/20';
+where hiredate <= '1981-04-05';
+
+
+--desc emp;
+
+/****************************************************************/
+정렬 order by
+단순 조회-> 정렬을 명시하지 않으면 순서보장 x
+ORDER BY 정렬기준컬럼명 [ASC|DESC] [오름차순|내림차순]
+
+SELECT ...
+FROM ...
+WHERE ...
+ORDER BY ...
+
+SELECT ...
+FROM ...
+ORDER BY...
+;
+
+select *
+from student
+order by name ASC;
+--order by name; -- 기본은 ASC 오름차순
+
+--내림차순 DESC
+select *
+from student
+order by name DESC; -- 내림차순에는 DESC를 꼭 작성을 해야함
+
+-- 학생들 학년기준으로 내림차순
+
+select name, grade
+from student
+order by grade DESC;
+-- 1,2,3 학년 중 키순으로 내림차순 정보 조회
+
+select *
+from student
+where grade IN(1,2,3)
+order by grade, height DESC;
+
+select *
+from student
+where grade IN(1,2,3)
+order by height, grade desc;
+
+select *
+from student
+--order by birthday;
+--order by birthday asc;
+order by birthday desc;
+
+
